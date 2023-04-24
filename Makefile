@@ -1,6 +1,15 @@
 install-global-deps:
 	npm install -g winglang create-react-app
 
+install-awscli:
+	brew install unzip
+	mkdir -p ~/bin
+	curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+	unzip -nq awscliv2.zip
+	sudo ./aws/install --update --install-dir ~/bin --bin-dir ~/bin
+	rm awscliv2.zip
+	rm -rf aws
+
 install:
 	npm install
 	cd pixelizer && npm install
@@ -42,3 +51,6 @@ build:
 	cd pixelizer && npm run build
 	ls -la
 	cp -a pixelizer/build/ build/
+
+test-pixelizer:
+	node pixelizer.ts
